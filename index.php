@@ -84,6 +84,7 @@ class Maze
 
 	public function printStepCount()
 	{
+		echo "<br/>";
 		echo "It takes {$this->step_count} steps.";
 	}
 
