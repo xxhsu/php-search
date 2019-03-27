@@ -556,6 +556,8 @@ $directionText = [
 	4 => '左'
 ];
 
+set_time_limit(0);
+
 $digitalPuzzle = new Maze($map, [0, 1], [26, 38]);
 //$digitalPuzzle->setDirectionText($directionText);
 //$digitalPuzzle->printPuzzle();
