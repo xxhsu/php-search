@@ -2,7 +2,6 @@
 
 class Maze
 {
-
 	private $map;
 	private $entry;
 	private $destination;
