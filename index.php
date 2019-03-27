@@ -150,7 +150,6 @@ class Maze
 
 class DigitalPuzzle
 {
-
 	private $scale;
 	private $originPuzzle;
 	private $currentPuzzle;
