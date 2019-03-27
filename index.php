@@ -182,8 +182,8 @@ class DigitalPuzzle
 		$this->whiteBlock = $this->locateWhiteBlock($this->currentPuzzle);
 
 		$path = $this->puzzleToPlain($this->currentPuzzle);
-		$this->path[] = $path
-;	}
+		$this->path[] = $path;
+	}
 
 	public function initPuzzle($scale = 3)
 	{
