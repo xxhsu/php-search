@@ -544,9 +544,9 @@ $map = [
 ];
 
 $puzzle = [
-	[4,0,7],
-	[1,8,6],
-	[5,3,2]
+	[1,2,3],
+	[4,5,6],
+	[7,0,8]
 ];
 
 $directionText = [
@@ -558,10 +558,15 @@ $directionText = [
 
 set_time_limit(0);
 
-$digitalPuzzle = new Maze($map, [0, 1], [26, 38]);
-//$digitalPuzzle->setDirectionText($directionText);
-//$digitalPuzzle->printPuzzle();
-$digitalPuzzle->walk();
-$digitalPuzzle->printPath();
-echo "<br/>";
-$digitalPuzzle->printStepCount();
+// 迷宫（深搜）
+//$game = new Maze($map, [0, 1], [26, 38]);
+//$game->walk();
+//$game->printPath();
+//$game->printStepCount();
+
+// 数字华容道（深搜/广搜）
+//$game = new DigitalPuzzle($puzzle);
+//$game->setDirectionText($directionText);
+//$game->printPuzzle();
+//$game->walk();
+//$game->printSteps();
