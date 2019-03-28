@@ -371,21 +371,30 @@ class DigitalPuzzle
 		}
 	}
 
-	public function walk($type = 'bfs')
+	private function traceSteps()
 	{
-		switch ($type) {
-			case 'bfs':
-				return $this->BfsWalk();
-				break;
+		$step = array_shift($this->fullStepQueue);
+		$lastId = $step['last_id'];
+		$this->steps[] = $step['direction'];
 
-			case 'dfs':
-				return $this->DfsWalk();
-				break;
-			
-			default:
-				return $this->BfsWalk();
-				break;
+		while ($step = array_shift($this->fullStepQueue)) {
+			if ($step['id'] == $lastId) {
+				$this->steps[] = $step['direction'];
+				$lastId = $step['last_id'];
+			}
 		}
+
+		$this->steps = array_reverse($this->steps);
+	}
+
+	private function stepFingerprint($stepId, $lastStepId, $direction)
+	{
+		$step = [
+			'id' => $stepId,
+			'last_id' => $lastStepId,
+			'direction' => $direction
+		];
+		return $step;
 	}
 
 	public function DfdWalk()
@@ -434,32 +443,6 @@ class DigitalPuzzle
 
 	}
 
-	private function traceSteps()
-	{
-		$step = array_shift($this->fullStepQueue);
-		$lastId = $step['last_id'];
-		$this->steps[] = $step['direction'];
-
-		while ($step = array_shift($this->fullStepQueue)) {
-			if ($step['id'] == $lastId) {
-				$this->steps[] = $step['direction'];
-				$lastId = $step['last_id'];
-			}
-		}
-
-		$this->steps = array_reverse($this->steps);
-	}
-
-	private function stepFingerprint($stepId, $lastStepId, $direction)
-	{
-		$step = [
-			'id' => $stepId,
-			'last_id' => $lastStepId,
-			'direction' => $direction
-		];
-		return $step;
-	}
-
 	public function BfsWalk()
 	{
 
@@ -505,6 +488,23 @@ class DigitalPuzzle
 			}
 		}
 	}
+
+	public function walk($type = 'bfs')
+	{
+		switch ($type) {
+			case 'bfs':
+				return $this->BfsWalk();
+				break;
+
+			case 'dfs':
+				return $this->DfsWalk();
+				break;
+			
+			default:
+				return $this->BfsWalk();
+				break;
+		}
+	}
 }
 
 // way=0, wall=1
@@ -544,9 +544,9 @@ $map = [
 ];
 
 $puzzle = [
-	[1,2,3],
-	[4,5,6],
-	[7,0,8]
+	[2,3,6],
+	[1,0,4],
+	[7,5,8]
 ];
 
 $directionText = [
@@ -568,5 +568,5 @@ set_time_limit(0);
 //$game = new DigitalPuzzle($puzzle);
 //$game->setDirectionText($directionText);
 //$game->printPuzzle();
-//$game->walk();
+//$game->walk('bfs');
 //$game->printSteps();
